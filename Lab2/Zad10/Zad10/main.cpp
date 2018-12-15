@@ -28,7 +28,12 @@ int main()
 	//std::cout << lista.imie << " " << lista.nazwisko << " " << lista.wiek << '\n';
 
 	//lista.addElement("A", "B", 50);
-	std::cout << lista.show(4).imie << '\n';
+	lista.showAll();
+	std::cout << '\n';
+
+	lista.drop(2);
+
+	lista.showAll();
 
 	myfile.close();
 	system("PAUSE");

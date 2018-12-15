@@ -1,3 +1,4 @@
+#include <vector>
 #include "Lista.h"
 
 Lista::Lista(const std::string &_imie, const std::string &_nazwisko, unsigned int _wiek)
@@ -24,7 +25,7 @@ void Lista::addElement(const std::string &_imie, const std::string &_nazwisko, u
 	//nextElement->nextElement = nullptr;
 }
 
-const Lista & Lista::show(unsigned int n)
+const Lista & Lista::show(unsigned int n) const
 {
 	if (this->nextElement == nullptr)
 		return *this;
@@ -40,13 +41,63 @@ const Lista & Lista::show(unsigned int n)
 	return *tmp;
 }
 
+void Lista::showAll() const
+{
+	if (this->nextElement == nullptr)
+		return;
+
+	Lista *tmp = this->nextElement;
+	while (tmp->nextElement != nullptr)
+	{
+		std::cout << tmp->imie << " " << tmp->nazwisko << " " << tmp->wiek << '\n';
+		tmp = tmp->nextElement;
+	}
+	std::cout << tmp->imie << " " << tmp->nazwisko << " " << tmp->wiek << '\n';
+}
+
+bool Lista::drop(unsigned int n)
+{
+	if (this->nextElement == nullptr)
+		return false;
+
+	Lista *tmp = this;
+	for (unsigned int i = 1; i < n + 1; ++i)
+	{
+		if (tmp->nextElement == nullptr && i != n + 1)
+		{
+			return false;
+		}
+		
+		Lista *prev = tmp;
+		tmp = tmp->nextElement;
+		if (i == n)
+		{
+			prev->nextElement = tmp->nextElement;
+			delete tmp;
+			
+			return true;
+		}
+	}
+	return false;
+}
+
 Lista::~Lista()
 {
 	if (this->nextElement == nullptr)
 	{
 		delete this;
+		return;
 	}
+
+	Lista *prev = this;
 	Lista *tmp = this->nextElement;
 	while (tmp->nextElement != nullptr)
+	{
+
+		Lista *prev = tmp;
 		tmp = tmp->nextElement;
+		prev->nextElement = tmp->nextElement;
+		delete tmp;
+	}
+
 }
