@@ -8,6 +8,12 @@ Lista::Lista(const std::string &_imie, const std::string &_nazwisko, unsigned in
 
 void Lista::addElement(const std::string &_imie, const std::string &_nazwisko, unsigned int _wiek)
 {
-	nextElement = std::make_unique<Lista>(Lista(_imie, _nazwisko, _wiek));
+	Lista *tmp = this->nextElement;
+	while (tmp->nextElement != nullptr)
+		tmp = tmp->nextElement;
+	tmp->nextElement = new Lista(_imie, _nazwisko, _wiek);
+
+
+	//nextElement = std::make_shared<Lista>(_imie, _nazwisko, _wiek);
 	//nextElement->nextElement = nullptr;
 }
