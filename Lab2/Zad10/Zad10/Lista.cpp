@@ -93,10 +93,10 @@ Lista::~Lista()
 	Lista *tmp = this->nextElement;
 	while (tmp->nextElement != nullptr)
 	{
-
 		Lista *prev = tmp;
 		tmp = tmp->nextElement;
-		prev->nextElement = tmp->nextElement;
+		if (tmp->nextElement != nullptr)
+			prev->nextElement = tmp->nextElement;
 		delete tmp;
 	}
 
