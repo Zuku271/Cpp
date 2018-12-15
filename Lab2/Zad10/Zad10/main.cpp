@@ -13,5 +13,6 @@ int main()
 
 	std::cout << lista.imie << " " << lista.nazwisko << " " << lista.wiek << '\n';
 
+	system("PAUSE");
 	return 0;
 }
